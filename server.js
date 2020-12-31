@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
-const projectName = 'aquiarium-frontend';
+const projectName = 'aquarium';
 const projectPath = `${__dirname}/dist/${projectName}`;
 
 app.use(express.static(projectPath));
