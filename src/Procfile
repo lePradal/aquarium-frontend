@@ -1,1 +1,1 @@
-web: npm start
+web: npm start --proxy-config proxy.conf.json

@@ -1,0 +1,11 @@
+{
+  "/back-host": {
+    "target": "https://api-aquario.herokuapp.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/back-host": ""
+    }
+  }
+}
