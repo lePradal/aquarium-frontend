@@ -1,0 +1,10 @@
+.detailed {
+    box-shadow:  6px 6px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+img {
+    margin-top: 20px;
+    width: 300px;
+}

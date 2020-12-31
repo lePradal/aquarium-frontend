@@ -1,0 +1,30 @@
+<div class="container mt-5 p-4 w-75 signup-container">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm.value)">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name" required>
+        <label for="name">Name</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="name@example.com" required>
+        <label for="email">Email</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password" required>
+        <label for="password">Password</label>
+      </div>
+      <div *ngIf="requested && !createdUser" class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
+        <strong>Ops!</strong> {{ returnMsg }}.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div *ngIf="requested && createdUser" class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+        <strong>Yeah!</strong> Account successfully created.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div *ngIf="!createdUser" class="d-grid gap-2 mt-3">
+        <button type="submit" class="btn btn-info btn-lg" [disabled]="signUpForm.invalid">Create Account</button>
+      </div>
+      <div *ngIf="createdUser" class="d-grid gap-2 mt-3">
+        <button type="button" class="btn btn-info btn-lg" routerLink="/login">Signin Now!</button>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,19 @@
+<div class="card border-info flex-row flex-wrap">
+  <div class="card-header p-0">
+    <img class="rounded-3" [src]="imgSrc" alt="Card image cap">
+  </div>
+  <div class="card-body border-info">
+    <h5 class="card-title">{{ aquarium.name }}</h5>
+    <p>Aquário de água salgada para criação de camarão.</p>
+  </div>
+  <div class="card-footer w-100 border-info text-muted">
+    <div class="row">
+      <div class="w-25">
+        <p class="card-text"><small class="text-muted">Criado em</small></p>
+      </div>
+      <div class="w-75">
+        <p class="card-text"><small class="text-muted">{{ aquarium.creationDate | date: 'dd/MM/yyyy HH:mm' }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>

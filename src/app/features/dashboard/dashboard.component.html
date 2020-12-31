@@ -1,0 +1,7 @@
+<div class="container mt-4 p-0">
+    <div *ngIf="aquariumListRequested && myAquariums.length == 0" class="alert alert-warning mt-3 alert-dismissible fade show" role="alert">
+        <strong>Ops!</strong> {{ returnMsg }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <app-aquarium-simple-container [aquariumList]="myAquariums"></app-aquarium-simple-container>
+</div>

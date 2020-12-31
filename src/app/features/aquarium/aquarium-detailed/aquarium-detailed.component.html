@@ -1,0 +1,26 @@
+<div class="container detailed d-flex justify-content-center mt-3">
+  <div class="card user-card w-100">
+    <div class="card-header">
+        <h5>{{aquarium.name}}</h5>
+    </div>
+    <div class="card-block">
+        <div class="user-image d-flex justify-content-center">
+            <input type="file" hidden accept="image/jpg" #file>
+            <img [src]="imgSrc" class="img-radius" alt="User-Profile-Image" (click)="file.click()">
+        </div>
+        <hr>
+        <div class="p-3">
+          <p *ngIf="aquarium.description" class="text-muted">Descrição: {{ aquarium.description }}</p>
+          <p class="text-muted">Volume: {{ aquarium.volume | number: '1.1'}} L</p>
+          <p *ngIf="aquarium.controlActive" class="text-muted">Nível: {{ aquarium.waterLevel | percent: '1.1'}}</p>
+          <p *ngIf="aquarium.controlActive && aquarium.tempControlActive" class="text-muted">Temperatura: {{ aquarium.temperature | number: '1.1'}} °C</p>
+          <p *ngIf="aquarium.controlActive && aquarium.tempControlActive" class="text-muted">Temp. desejada: {{ aquarium.setPointTemp | number: '1.1'}} °C</p>
+          <p *ngIf="aquarium.controlActive && aquarium.phMonitActive" class="text-muted">pH: {{ aquarium.pH | number: '1.1'}}</p>
+
+          <p class="text-muted">status: {{ aquarium.status}}</p>
+          
+          <p class="m-t-15 text-muted">Criado em: {{aquarium.creationDate | date: 'dd/MM/yyyy HH:mm'}}</p>
+        </div>
+    </div>
+  </div>
+</div>
