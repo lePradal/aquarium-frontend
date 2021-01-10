@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -32,7 +32,7 @@ import { HomeComponent } from './features/home/home/home.component';
     AngularFireAuthModule, // auth
     AngularFireStorageModule
   ],
-  providers: [],
+  providers: [ AngularFirestore ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
