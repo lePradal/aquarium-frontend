@@ -1,0 +1,42 @@
+<div class="container detailed d-flex justify-content-center mt-3">
+  <form [formGroup]="aquariumForm" (ngSubmit)="onSubmit(aquariumForm.value)">
+    <div class="card user-card w-100">
+      <div class="card-header">
+        <div class="form-floating mb-3">
+          <input #aquariumNameInput type="text" class="form-control" id="name" formControlName="name" placeholder="Aquarium Name">
+          <label for="name">Aquarium Name</label>
+          <small *ngIf="aquariumForm.get('name').errors?.required" class="text-danger d-block mt-2">Name is required!</small>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="user-image d-flex justify-content-center">
+          <input type="file" hidden accept="image/jpg" #file (change)="fileChange($event)">
+          <img [src]="imgSrc" class="img-radius" alt="User-Profile-Image" (click)="file.click()">
+        </div>
+        <hr>
+        <div class="p-3">
+          <div class="form-floating">
+            <input type="number" class="form-control" id="volume" formControlName="volume" placeholder="50" max="5000">
+            <label for="volume">Volume</label>
+            <small *ngIf="aquariumForm.get('volume').errors?.required" class="text-danger d-block mt-2">Volume is required!</small>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="description" formControlName="description" placeholder="Some description">
+            <label for="description">Description</label>
+            <small *ngIf="aquariumForm.get('description').errors?.required" class="text-danger d-block mt-2">Description is required!</small>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center p-1 mb-2">
+          <div class="btn-group" role="group">
+            <button type="submit" class="btn btn-lg btn-outline-info" [disabled]="aquariumForm.invalid">Save</button>
+          </div>
+        </div>
+
+        <div *ngIf="error" class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
+          <strong>Ops!</strong>{{ returnMsg }} 
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

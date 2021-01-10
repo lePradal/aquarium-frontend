@@ -1,16 +1,16 @@
-export class Aquarium {
-    public id?: number;
-    public name?: string;
-    public description?: string;
-    public imageBase64?: string;
-    public volume?: number;
-    public waterLevel?: number;
-    public temperature?: number;
-    public controlActive?: boolean;
-    public tempControlActive?: boolean;
-    public setPointTemp?: number;
-    public pH?: number;
-    public phMonitActive?: boolean;
-    public creationDate?: Date;
-    public status?: string;
+export interface IAquarium {
+    id?: number;
+    name?: string;
+    description?: string;
+    imageUrl?: string;
+    volume?: number;
+    waterLevel?: number;
+    temperature?: number;
+    controlActive?: boolean;
+    tempControlActive?: boolean;
+    setPointTemp?: number;
+    pH?: number;
+    phMonitActive?: boolean;
+    creationDate?: Date;
+    status?: string;
 }

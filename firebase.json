@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "aquarium-frontend",
+    "public": "dist/aquarium",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

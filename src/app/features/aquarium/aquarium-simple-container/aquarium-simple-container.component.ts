@@ -1,9 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Aquarium } from 'src/app/core/models/aquarium';
-import { AquariumService } from 'src/app/core/services/aquarium.service';
+import { IAquarium } from 'src/app/core/models/aquarium';
 
 @Component({
   selector: 'app-aquarium-simple-container',
@@ -12,7 +9,7 @@ import { AquariumService } from 'src/app/core/services/aquarium.service';
 })
 export class AquariumSimpleContainerComponent implements OnInit {
 
-  @Input() aquariumList: Aquarium[] = [];
+  @Input() aquariumList: IAquarium[] = [];
 
   constructor(private router: Router) { }
 

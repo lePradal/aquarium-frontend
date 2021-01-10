@@ -4,4 +4,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <app-aquarium-simple-container [aquariumList]="myAquariums"></app-aquarium-simple-container>
+    <div class="d-flex justify-content-end p-2 mt-3">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-lg btn-outline-secondary" [routerLink]="'../aquarium/create'">New Aquarium</button>
+        </div>
+    </div>
 </div>

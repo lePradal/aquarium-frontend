@@ -1,9 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Aquarium } from 'src/app/core/models/aquarium';
-import { aquariumListMock } from 'src/app/core/models/mocks/aquariums-mock';
-import { AquariumService } from 'src/app/core/services/aquarium.service';
+import { Observable } from 'rxjs';
+import { IAquarium } from 'src/app/core/models/aquarium';
+import { IValidUserResponse } from 'src/app/core/models/responses/valid-user-response';
+import { AquariumService } from 'src/app/core/services/aquarium/aquarium.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,15 +15,26 @@ import { AquariumService } from 'src/app/core/services/aquarium.service';
 })
 export class DashboardComponent implements OnInit {
 
-  public myAquariums: Aquarium[] = [];
-  public returnMsg: string = '';
-  public aquariumListRequested: boolean = false;
+  public myAquariums: IAquarium[];
+  public returnMsg?: string;
+  public aquariumListRequested: boolean;
 
-  constructor(private aquariumService: AquariumService, private loaderService: NgxSpinnerService) {
-  }
+  constructor(
+    private aquariumService: AquariumService,
+    private loaderService: NgxSpinnerService,
+    private authService: AuthService,
+  ) {
+    this.myAquariums = [];
+    this.aquariumListRequested = false;
+  } 
 
   ngOnInit(): void {
     this.loaderService.show();
+    this.validateToken();
+    this.loadAquariums();
+  }
+
+  public loadAquariums() {
     this.aquariumService.getAquariumList().subscribe({
       error: (error: HttpErrorResponse) => {
         this.aquariumListRequested = true;
@@ -34,13 +48,16 @@ export class DashboardComponent implements OnInit {
 
         this.loaderService.hide();
       },
-      next: (response: any) => {
+      next: (response) => {
         this.aquariumListRequested = true;
         this.myAquariums = response.content;
-        console.log(response);
         this.loaderService.hide();
       },
     });
+  }
+
+  public validateToken() {
+    this.authService.validateToken();
   }
 
 }

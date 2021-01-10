@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { Aquarium } from 'src/app/core/models/aquarium';
-import { AquariumService } from 'src/app/core/services/aquarium.service';
+import { IAquarium } from 'src/app/core/models/aquarium';
+import { ImageService } from 'src/app/core/services/image/image.service';
 
 @Component({
   selector: 'app-aquarium-simple',
@@ -10,19 +10,21 @@ import { AquariumService } from 'src/app/core/services/aquarium.service';
 })
 export class AquariumSimpleComponent implements OnInit {
 
-  @Input() aquarium: Aquarium = {};
+  @Input() aquarium?: IAquarium;
 
   public imgSrc: SafeResourceUrl = '';
 
-  constructor(private aquariumService: AquariumService) { }
+  constructor(private imageService: ImageService) {
+    this.aquarium = {}
+  }
 
   ngOnInit(): void {
     this.getImageSrc();
   }
 
   public getImageSrc() {
-    const src = this.aquarium.imageBase64 || '';
-    this.imgSrc = this.aquariumService.getImageSrcFromBase64(src);
+    const src = this.aquarium?.imageUrl || '';
+    this.imgSrc = this.imageService.getImageSrcFromBase64(src);
   }
 
 }

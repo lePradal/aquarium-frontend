@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ISignUpRequest } from 'src/app/core/models/requests/sign-up-request';
-import { SignService } from 'src/app/core/services/sign.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,11 +17,11 @@ export class SignupComponent implements OnInit {
   public createdUser: boolean;
   public returnMsg: string;
 
-  constructor(private formBuilder: FormBuilder, private signService: SignService, private loaderService: NgxSpinnerService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private loaderService: NgxSpinnerService) {
     this.signUpForm = this.formBuilder.group({
-      name: '',
-      email: '',
-      password: '',
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
     });
 
     this.requested = false;
@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
   public onSubmit(customerData: ISignUpRequest) {
     this.createdUser = false;
     this.loaderService.show();
-    this.signService.createAccount(customerData).subscribe({
+    this.authService.createAccount(customerData).subscribe({
       error: (error: HttpErrorResponse) => {
         console.error(error);
         this.requested = true;
@@ -45,7 +45,6 @@ export class SignupComponent implements OnInit {
         this.loaderService.hide();
       },
       next: (response) => {
-        console.log(response);
         this.requested = true;
         this.createdUser = true;
         this.loaderService.hide();

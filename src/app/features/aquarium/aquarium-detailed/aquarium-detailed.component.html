@@ -21,6 +21,23 @@
           
           <p class="m-t-15 text-muted">Criado em: {{aquarium.creationDate | date: 'dd/MM/yyyy HH:mm'}}</p>
         </div>
+
+        <div class="d-flex justify-content-center mb-2">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-info" [routerLink]="'/aquarium/update/' + id" >Update</button>
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#meuModal">Delete</button>
+          </div>
+        </div>
     </div>
   </div>
 </div>
+
+<app-modal
+  [id]="'meuModal'"
+  [title]="'Atenção'"
+  [message]="'Deseja realmente excluir esse aquário?'"
+  [closeBtnText]="'Cancelar'"
+  [submitBtnText]="'Excluir'"
+  (event)="deleteAquarium(id)"
+>
+</app-modal>

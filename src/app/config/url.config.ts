@@ -1,7 +1,11 @@
-export const urlConfig = Object.freeze({
-    auth: '/back-host/auth',
-    valid: '/back-host/user/valid',
-    signup: '/back-host/user/signup',
+import { environment } from "src/environments/environment";
 
-    get_aquarium: '/back-host/aquariums',
+export const urlConfig = Object.freeze({
+    user: `${environment.API}/user`,
+    auth: `${environment.API}/auth`,
+    aquarium: `${environment.API}/aquariums`,
+
+    // user: `/back-host/user`,
+    // auth: `/back-host/auth`,
+    // aquarium: `/back-host/aquariums`,
 });

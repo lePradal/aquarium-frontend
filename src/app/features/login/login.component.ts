@@ -1,10 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ISignInRequest } from 'src/app/core/models/requests/sign-in-request';
-import { SignService } from 'src/app/core/services/sign.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +14,15 @@ import { SignService } from 'src/app/core/services/sign.service';
 export class LoginComponent implements OnInit {
 
   public signInForm: any;
-  public accessDenied: boolean;
+  @ViewChild('emailInput') public emailInput: ElementRef<HTMLInputElement> | undefined;
+  public accessDenied: boolean | undefined;;
+  public returnMsg: string | undefined;
 
-  constructor(private formBuilder: FormBuilder, private signInService: SignService, private router: Router, private loaderService: NgxSpinnerService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private loaderService: NgxSpinnerService) {
     this.signInForm = this.formBuilder.group({
-      email: '',
-      password: '',
+      email: ['', Validators.required],
+      password: ['', Validators.required],
     });
-
-    this.accessDenied = false;
   }
 
   ngOnInit(): void {}
@@ -30,15 +30,22 @@ export class LoginComponent implements OnInit {
   public onSubmit(customerData: ISignInRequest) {
     this.loaderService.show();
     this.accessDenied = false;
-    this.signInService.login(customerData).subscribe({
+    this.authService.login(customerData).subscribe({
       error: (error: HttpErrorResponse) => {
         this.accessDenied = true;
-        console.log(error);
+        console.error(error);
+
+        if (error.status == 400) {
+          this.signInForm.reset();
+          this.returnMsg = 'Wrong username or password.';
+        } else {
+          this.returnMsg = 'Could not login. Please try again later.';
+        }
+
         this.loaderService.hide();
+        this.emailInput?.nativeElement.focus();
       },
-      next: (response) => {
-        sessionStorage.setItem('token', response.token);
-        sessionStorage.setItem('type', response.type);
+      next: () => {
         this.loaderService.hide();
         this.router.navigate(['dashboard']);
       },
