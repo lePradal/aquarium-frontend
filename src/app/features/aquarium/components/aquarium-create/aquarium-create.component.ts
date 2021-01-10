@@ -70,7 +70,8 @@ export class AquariumCreateComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e: any) => this.imgSrc = e.target.result;
       reader.readAsDataURL(file);
-      this.imageService.startUpload(file);
+      const isso = this.imageService.startUpload(file);
+      console.log(isso);
     } else {
       this.imgSrc = imgPlaceholder;
     }

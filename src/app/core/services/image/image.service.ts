@@ -20,23 +20,19 @@ export class ImageService {
 
   public startUpload(file: File) {    
 
-    // The storage path
     const path = `/aquarium/aquariums/${Date.now()}_${file.name}`;
-
-    // Reference to storage bucket
     const ref = this.storage.ref(path);
 
     // The main task
-    this.task = this.storage.upload(path, file);
-
-    this.snapshot   = this.task.snapshotChanges().pipe(
-      tap(console.log),
-      // The file's download URL
-      finalize( async() =>  {
-        this.downloadURL = await ref.getDownloadURL().toPromise();
-        console.log(this.downloadURL);
-      }),
-    );
+    return this.storage.upload(path, file).snapshotChanges().pipe(
+      finalize(() => {
+        ref.getDownloadURL().subscribe((url) => {
+          console.log(url);
+        })
+      })
+    ).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   isActive(snapshot: any) {
