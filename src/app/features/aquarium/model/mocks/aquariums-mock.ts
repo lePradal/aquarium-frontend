@@ -1,6 +1,6 @@
-import { Aquarium } from "../aquarium";
+import { IAquarium } from "../aquarium";
 
-export const aquariumMock: Aquarium = {
+export const aquariumMock: IAquarium = {
     id: 0,
     controlActive: true,
     creationDate: new Date(Date.now()),
@@ -15,7 +15,7 @@ export const aquariumMock: Aquarium = {
     waterLevel: 0.95,
 }
 
-export const aquariumListMock: Aquarium[] = [
+export const aquariumListMock: IAquarium[] = [
     {
         id: 0,
         controlActive: true,

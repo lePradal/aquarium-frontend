@@ -1,31 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './core/guards/auth.guard';
-import { LoggedGuard } from './core/guards/logged.guard';
-import { AquariumCreateComponent } from './features/aquarium/aquarium-create/aquarium-create.component';
-import { AquariumDetailedComponent } from './features/aquarium/aquarium-detailed/aquarium-detailed.component';
-import { AquariumUpdateComponent } from './features/aquarium/aquarium-update/aquarium-update.component';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { SigninComponent } from './features/login/signin/signin.component';
-import { SignupComponent } from './features/login/signup/signup.component';
+import { HomeComponent } from './features/home/home/home.component';
 
 const routes: Routes = [
-  { path: 'signin', component: SigninComponent, canActivate: [LoggedGuard]},
-  { path: 'signup', component: SignupComponent, canActivate: [LoggedGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'aquarium',
-    children: [
-      { path: 'create', component: AquariumCreateComponent, pathMatch: 'full'},
-      { path: 'update/:id', component: AquariumUpdateComponent },
-      { path: ':id', component: AquariumDetailedComponent },
-    ]
-  },
-  { path: '',   redirectTo: '/signin', pathMatch: 'full' },
-  { path: '**', redirectTo: '/signin' }
+  { path: 'home', component: HomeComponent },
+  { path: 'aquarium', loadChildren: () => import('./features/aquarium/aquarium.module').then(mod => mod.AquariumModule) },
+  { path: 'login', loadChildren: () => import('./features/login/login.module').then(mod => mod.LoginModule) },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

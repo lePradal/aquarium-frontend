@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { IAquarium } from 'src/app/core/models/aquarium';
-import { AquariumService } from 'src/app/core/services/aquarium/aquarium.service';
+import { IAquarium } from 'src/app/features/aquarium/model/aquarium';
+import { AquariumService } from 'src/app/features/aquarium/service/aquarium.service';
 import { ImageService } from 'src/app/core/services/image/image.service';
 
 @Component({
@@ -35,7 +35,7 @@ export class AquariumDetailedComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         console.error(error);
         this.loaderService.hide();
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['aquarium']);
       },
       next: (response) => {
         this.aquarium = response;
@@ -56,11 +56,11 @@ export class AquariumDetailedComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         console.error(error);
         this.loaderService.hide();
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['aquarium']);
       },
       next: (response) => {
         this.loaderService.hide();
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['aquarium']);
       }
     })
   }

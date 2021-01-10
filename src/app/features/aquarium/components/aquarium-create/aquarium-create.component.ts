@@ -4,8 +4,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AquariumCreateRequest } from 'src/app/core/models/requests/aquarium-create-request';
-import { AquariumService } from 'src/app/core/services/aquarium/aquarium.service';
+import { AquariumCreateRequest } from 'src/app/features/aquarium/model/request/aquarium-create-request';
+import { AquariumService } from 'src/app/features/aquarium/service/aquarium.service';
 import { ImageService } from 'src/app/core/services/image/image.service';
 import { UploadService } from 'src/app/core/services/upload/upload.service';
 
@@ -64,7 +64,7 @@ export class AquariumCreateComponent implements OnInit {
       },
       next: () => {
         this.loaderService.hide();
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['aquarium']);
       },
     });
   }

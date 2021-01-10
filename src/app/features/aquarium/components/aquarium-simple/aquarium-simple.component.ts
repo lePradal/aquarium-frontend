@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { IAquarium } from 'src/app/core/models/aquarium';
+import { IAquarium } from 'src/app/features/aquarium/model/aquarium';
 import { ImageService } from 'src/app/core/services/image/image.service';
 
 @Component({

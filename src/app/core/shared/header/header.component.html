@@ -8,13 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mb-2 mt-2 mb-lg-0">
             <li class="nav-item">
-              <a *ngIf="user" class="nav-link" aria-current="page" routerLink="dashboard">Home</a>
+              <a *ngIf="user" class="nav-link" aria-current="page" routerLink="aquarium">Home</a>
             </li>
             <li *ngIf="!user" class="nav-item">
               <a class="nav-link" aria-current="page" routerLink="login">Sing In</a>
             </li>
             <li *ngIf="!user" class="nav-item">
-              <a class="nav-link" aria-current="page" routerLink="signup">Signup</a>
+              <a class="nav-link" aria-current="page" routerLink="/login/signup">Signup</a>
             </li>
             <li *ngIf="user" class="nav-item">
               <a class="nav-link" aria-current="page" (click)="logout()">Logout</a>

@@ -2,18 +2,18 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
-import { IAquarium } from 'src/app/core/models/aquarium';
+import { IAquarium } from 'src/app/features/aquarium/model/aquarium';
 import { IValidUserResponse } from 'src/app/core/models/responses/valid-user-response';
-import { AquariumService } from 'src/app/core/services/aquarium/aquarium.service';
+import { AquariumService } from 'src/app/features/aquarium/service/aquarium.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-aquarium',
+  templateUrl: './aquarium.component.html',
+  styleUrls: ['./aquarium.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class AquariumComponent implements OnInit {
 
   public myAquariums: IAquarium[];
   public returnMsg?: string;

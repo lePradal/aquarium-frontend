@@ -47,7 +47,7 @@ export class SigninComponent implements OnInit {
       },
       next: () => {
         this.loaderService.hide();
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['aquarium']);
       },
     });
   }

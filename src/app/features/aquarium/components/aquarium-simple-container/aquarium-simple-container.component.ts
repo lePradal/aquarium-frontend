@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IAquarium } from 'src/app/core/models/aquarium';
+import { IAquarium } from 'src/app/features/aquarium/model/aquarium';
 
 @Component({
   selector: 'app-aquarium-simple-container',

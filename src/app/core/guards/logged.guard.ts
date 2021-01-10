@@ -9,7 +9,7 @@ export class LoggedGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if(this.authService.isLoggedUser()) {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['aquarium']);
       return false;
     } else {
       return true;

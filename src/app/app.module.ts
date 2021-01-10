@@ -1,50 +1,38 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { firebaseConfig } from './config/angular-fire.config';
 import { HeaderComponent } from './core/shared/header/header.component';
 import { LoadingComponent } from './core/shared/loading/loading.component';
-import { ModalComponent } from './core/shared/modal/modal.component';
-import { AquariumCreateComponent } from './features/aquarium/aquarium-create/aquarium-create.component';
-import { AquariumDetailedComponent } from './features/aquarium/aquarium-detailed/aquarium-detailed.component';
-import { AquariumSimpleContainerComponent } from './features/aquarium/aquarium-simple-container/aquarium-simple-container.component';
-import { AquariumSimpleComponent } from './features/aquarium/aquarium-simple/aquarium-simple.component';
-import { AquariumUpdateComponent } from './features/aquarium/aquarium-update/aquarium-update.component';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { SigninComponent } from './features/login/signin/signin.component';
-import { SignupComponent } from './features/login/signup/signup.component';
+import { HomeComponent } from './features/home/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent,
     HeaderComponent,
-    DashboardComponent,
-    SignupComponent,
-    AquariumSimpleComponent,
-    AquariumDetailedComponent,
-    AquariumSimpleContainerComponent,
     LoadingComponent,
-    AquariumUpdateComponent,
-    ModalComponent,
-    AquariumCreateComponent,
+    HomeComponent,
   ],
   imports: [
     AppRoutingModule,
-    BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     NgxSpinnerModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

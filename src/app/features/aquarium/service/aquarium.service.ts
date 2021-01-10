@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { urlConfig } from 'src/app/config/url.config';
-import { IAquarium } from '../../models/aquarium';
-import { AquariumCreateRequest } from '../../models/requests/aquarium-create-request';
-import { AquariumUpdateRequest } from '../../models/requests/aquarium-update-request';
-import { IAquariumResponse } from '../../models/responses/aquariums.response';
-import { AuthService } from '../auth/auth.service';
+import { IAquarium } from '../model/aquarium';
+import { AquariumCreateRequest } from '../model/request/aquarium-create-request';
+import { AquariumUpdateRequest } from '../model/request/aquarium-update-request';
+import { IAquariumResponse } from '../model/response/aquariums.response';
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
