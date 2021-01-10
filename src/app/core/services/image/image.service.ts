@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { defaultSrc } from 'dist/aquarium/assets/imgs/aquarium/default';
+import { defaultSrc } from 'src/assets/imgs/aquarium/default';
 
 @Injectable({
   providedIn: 'root'

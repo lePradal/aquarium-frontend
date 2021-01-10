@@ -8,10 +8,10 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SigninComponent implements OnInit {
 
   public signInForm: any;
   @ViewChild('emailInput') public emailInput: ElementRef<HTMLInputElement> | undefined;

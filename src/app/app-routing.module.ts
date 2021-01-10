@@ -6,11 +6,11 @@ import { AquariumCreateComponent } from './features/aquarium/aquarium-create/aqu
 import { AquariumDetailedComponent } from './features/aquarium/aquarium-detailed/aquarium-detailed.component';
 import { AquariumUpdateComponent } from './features/aquarium/aquarium-update/aquarium-update.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { LoginComponent } from './features/login/login.component';
-import { SignupComponent } from './features/signup/signup.component';
+import { SigninComponent } from './features/login/signin/signin.component';
+import { SignupComponent } from './features/login/signup/signup.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent, canActivate: [LoggedGuard]},
+  { path: 'signin', component: SigninComponent, canActivate: [LoggedGuard]},
   { path: 'signup', component: SignupComponent, canActivate: [LoggedGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'aquarium',
@@ -20,8 +20,8 @@ const routes: Routes = [
       { path: ':id', component: AquariumDetailedComponent },
     ]
   },
-  { path: '',   redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' }
+  { path: '',   redirectTo: '/signin', pathMatch: 'full' },
+  { path: '**', redirectTo: '/signin' }
 ];
 
 @NgModule({
