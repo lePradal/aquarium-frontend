@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
@@ -14,12 +13,12 @@ export class UploadService {
   public snapshot?: Observable<any>;
   public downloadURL?: string;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
+  constructor(private storage: AngularFireStorage) { }
 
   public startUpload(file: File) {    
 
     // The storage path
-    const path = `aquarium/aquariums/${Date.now()}_${file.name}`;
+    const path = `/aquarium/aquariums/${Date.now()}_${file.name}`;
 
     // Reference to storage bucket
     const ref = this.storage.ref(path);
@@ -33,7 +32,6 @@ export class UploadService {
       finalize( async() =>  {
         this.downloadURL = await ref.getDownloadURL().toPromise();
         console.log(this.downloadURL);
-        this.db.collection('files').add( { downloadURL: this.downloadURL, path });
       }),
     );
   }
