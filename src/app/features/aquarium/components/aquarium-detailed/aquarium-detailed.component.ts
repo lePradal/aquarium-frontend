@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { IAquarium } from 'src/app/features/aquarium/model/aquarium';
 import { AquariumService } from 'src/app/features/aquarium/service/aquarium.service';
 import { ImageService } from 'src/app/core/services/image/image.service';
+import { imgPlaceholder } from 'src/app/config/const';
 
 @Component({
   selector: 'app-aquarium-detailed',
@@ -15,7 +16,7 @@ import { ImageService } from 'src/app/core/services/image/image.service';
 export class AquariumDetailedComponent implements OnInit {
 
   public aquarium: IAquarium;
-  public imgSrc?: SafeResourceUrl;
+  public imgSrc = imgPlaceholder;
   public id: string;
 
   constructor(
@@ -39,16 +40,11 @@ export class AquariumDetailedComponent implements OnInit {
       },
       next: (response) => {
         this.aquarium = response;
-        this.getImageSrc();
         this.loaderService.hide();
       }
     })
   }
 
-  public getImageSrc() {
-    const src = this.aquarium?.imageUrl || '';
-    this.imgSrc = this.imageService.getImageSrcFromBase64(src);
-  }
 
   public deleteAquarium(id: string) {
     this.loaderService.show();

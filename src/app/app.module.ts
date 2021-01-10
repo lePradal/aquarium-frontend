@@ -5,6 +5,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/shared/header/header.component';
@@ -24,15 +25,7 @@ import { HomeComponent } from './features/home/home/home.component';
     CommonModule,
     HttpClientModule,
     NgxSpinnerModule,
-    AngularFireModule.initializeApp({
-      apiKey: "AIzaSyDNBzHEeQUTHv2Vuj0XUfXMzLqlCYvEiP0",
-      authDomain: "aquarium-frontend.firebaseapp.com",
-      projectId: "aquarium-frontend",
-      storageBucket: "aquarium-frontend.appspot.com",
-      messagingSenderId: "448078783788",
-      appId: "1:448078783788:web:4aa8ed06fc257a4b457889",
-      measurementId: "G-JTGNH056RL"
-    }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
   ],
   providers: [ ],

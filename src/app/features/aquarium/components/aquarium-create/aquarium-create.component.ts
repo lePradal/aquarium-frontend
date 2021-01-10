@@ -7,7 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AquariumCreateRequest } from 'src/app/features/aquarium/model/request/aquarium-create-request';
 import { AquariumService } from 'src/app/features/aquarium/service/aquarium.service';
 import { ImageService } from 'src/app/core/services/image/image.service';
-import { UploadService } from 'src/app/core/services/upload/upload.service';
+import { imgPlaceholder } from 'src/app/config/const';
 
 @Component({
   selector: 'app-aquarium-create',
@@ -17,10 +17,9 @@ import { UploadService } from 'src/app/core/services/upload/upload.service';
 export class AquariumCreateComponent implements OnInit {
 
   public aquariumForm: any;
-  public imgSrc: SafeResourceUrl = '';
+  public imgSrc: any = imgPlaceholder;
   public returnMsg: string | undefined;
   public error: boolean = false;
-  public base64: string = '';
   @ViewChild('aquariumNameInput') public nameInput: ElementRef<HTMLInputElement> | undefined;
 
   constructor(
@@ -29,7 +28,6 @@ export class AquariumCreateComponent implements OnInit {
     private imageService: ImageService,
     private router: Router,
     private loaderService: NgxSpinnerService,
-    private uploadService: UploadService,
   ) {
       this.aquariumForm = this.formBuilder.group({
         name: ['', Validators.required],
@@ -40,14 +38,9 @@ export class AquariumCreateComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.getImageSrc();
     this.nameInput?.nativeElement.focus();
   }
 
-  public getImageSrc() {
-    const src = this.base64;
-    this.imgSrc = this.imageService.getImageSrcFromBase64(src);
-  }
 
   public onSubmit(aquarium: AquariumCreateRequest) {
     this.loaderService.show();
@@ -69,35 +62,17 @@ export class AquariumCreateComponent implements OnInit {
     });
   }
 
-  public fileChange(event: any) {
-    this.uploadService.startUpload(event.target.files[0]);
-    // this.handleFileSelect(event);
-
-    // let fileList: FileList = event.target.files;
-    // if(fileList.length > 0) {
-    //   this.imageChanged = true;
-    //   let file: File = fileList[0];
-    //   this.formData.append('uploadFile', file, file.name);
-    // }
+  public fileChange(event: any){
+    const files = event.target.files;
+    const file = files[0];
+    
+    if (files && file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.imgSrc = e.target.result;
+      reader.readAsDataURL(file);
+      this.imageService.startUpload(file);
+    } else {
+      this.imgSrc = imgPlaceholder;
+    }
   }
-
-  // public handleFileSelect(event: any){
-  //   let files = event.target.files;
-  //   let file = files[0];
-
-  //   if (files && file) {
-  //       let reader = new FileReader();
-
-  //       reader.onload = this._handleReaderLoaded.bind(this);
-
-  //       reader.readAsBinaryString(file);
-  //   }
-  // }
-
-  // public _handleReaderLoaded(readerEvt: any) {
-  //   let binaryString = readerEvt.target.result;
-  //   this.base64 = btoa(binaryString);
-  //   this.getImageSrc();
-  // }
-
 }

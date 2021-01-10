@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   API: 'https://api-aquario.herokuapp.com',
+  firebaseConfig: {}
   //API: 'http://localhost:8080',
 };
 

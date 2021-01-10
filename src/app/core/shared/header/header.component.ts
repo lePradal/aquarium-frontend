@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { imgPlaceholder } from 'src/app/config/const';
 import { IUser } from '../../services/user/user';
 import { UserService } from '../../services/user/user.service';
 
@@ -13,6 +14,8 @@ export class HeaderComponent implements OnInit {
 
   public user$: Observable<IUser>;
   public user: IUser | null;
+
+  public userImgSrc = imgPlaceholder;
 
   constructor(private userService: UserService) {
     this.user = null;

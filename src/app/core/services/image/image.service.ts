@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
+import { tap, finalize } from 'rxjs/operators';
 import { defaultSrc } from 'src/assets/imgs/aquarium/default';
 
 @Injectable({
@@ -7,34 +10,36 @@ import { defaultSrc } from 'src/assets/imgs/aquarium/default';
 })
 export class ImageService {
 
+  public task?: AngularFireUploadTask;
+  public snapshot?: Observable<any>;
+  public downloadURL?: string;
+
   constructor(
-    private sanitizer: DomSanitizer,
+    private storage: AngularFireStorage,
   ) { }
 
-  public getImageSrcFromBase64(base64: string) {
-    const src = base64 || defaultSrc;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpg;base64, ${src}`);
+  public startUpload(file: File) {    
+
+    // The storage path
+    const path = `/aquarium/aquariums/${Date.now()}_${file.name}`;
+
+    // Reference to storage bucket
+    const ref = this.storage.ref(path);
+
+    // The main task
+    this.task = this.storage.upload(path, file);
+
+    this.snapshot   = this.task.snapshotChanges().pipe(
+      tap(console.log),
+      // The file's download URL
+      finalize( async() =>  {
+        this.downloadURL = await ref.getDownloadURL().toPromise();
+        console.log(this.downloadURL);
+      }),
+    );
   }
 
-  public getBase64Image() {
-
-  }
-
-  public handleFileSelect(event: any){
-    let files = event.target.files;
-    let file = files[0];
-
-    if (files && file) {
-        let reader = new FileReader();
-
-        reader.onload = this._handleReaderLoaded.bind(this);
-
-        reader.readAsBinaryString(file);
-    }
-  }
-
-  public _handleReaderLoaded(readerEvt: any) {
-    let binaryString = readerEvt.target.result;
-    btoa(binaryString);
+  isActive(snapshot: any) {
+    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
   }
 }
