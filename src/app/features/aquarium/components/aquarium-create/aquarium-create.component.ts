@@ -1,13 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize } from 'rxjs/operators';
+import { imgPlaceholder } from 'src/app/config/const';
 import { AquariumCreateRequest } from 'src/app/features/aquarium/model/request/aquarium-create-request';
 import { AquariumService } from 'src/app/features/aquarium/service/aquarium.service';
-import { ImageService } from 'src/app/core/services/image/image.service';
-import { imgPlaceholder } from 'src/app/config/const';
 
 @Component({
   selector: 'app-aquarium-create',
@@ -18,6 +18,7 @@ export class AquariumCreateComponent implements OnInit {
 
   public aquariumForm: any;
   public imgSrc: any = imgPlaceholder;
+  public imgUrl: string = imgPlaceholder;
   public returnMsg: string | undefined;
   public error: boolean = false;
   @ViewChild('aquariumNameInput') public nameInput: ElementRef<HTMLInputElement> | undefined;
@@ -25,9 +26,9 @@ export class AquariumCreateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private aquariumService: AquariumService,
-    private imageService: ImageService,
     private router: Router,
     private loaderService: NgxSpinnerService,
+    private storage: AngularFireStorage,
   ) {
       this.aquariumForm = this.formBuilder.group({
         name: ['', Validators.required],
@@ -45,6 +46,7 @@ export class AquariumCreateComponent implements OnInit {
   public onSubmit(aquarium: AquariumCreateRequest) {
     this.loaderService.show();
     this.error = false;
+    aquarium.imageUrl = this.imgUrl;
 
     this.aquariumService.createAquarium(aquarium).subscribe({
       error: (error: HttpErrorResponse) => {
@@ -70,10 +72,37 @@ export class AquariumCreateComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e: any) => this.imgSrc = e.target.result;
       reader.readAsDataURL(file);
-      const isso = this.imageService.startUpload(file);
-      console.log(isso);
+      
+      this.startUpload(file);
     } else {
       this.imgSrc = imgPlaceholder;
     }
+  }
+
+  public startUpload(file: File) {
+    this.loaderService.show();
+
+    const path = `/aquarium/aquariums/${Date.now()}_${file.name}`;
+    const ref = this.storage.ref(path);
+
+    return this.storage.upload(path, file).snapshotChanges().pipe(
+      finalize(() => {
+        ref.getDownloadURL().subscribe({
+          error: (error) => {
+            this.loaderService.hide();
+          },
+          next: (url) => {
+            this.imgUrl = url;
+          }
+        })
+      })
+    ).subscribe({
+      error: (error) => {
+        this.loaderService.hide();
+      },
+      next: (url) => {
+        this.loaderService.hide();
+      }
+    });
   }
 }

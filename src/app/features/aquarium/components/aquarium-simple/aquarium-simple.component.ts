@@ -11,12 +11,12 @@ import { imgPlaceholder } from 'src/app/config/const';
 })
 export class AquariumSimpleComponent implements OnInit {
 
-  @Input() aquarium?: IAquarium;
-
-  public imgSrc = imgPlaceholder;
+  @Input() aquarium: IAquarium;
 
   constructor(private imageService: ImageService) {
-    this.aquarium = {}
+    this.aquarium = {
+      imageUrl: imgPlaceholder,
+    }
   }
 
   ngOnInit(): void {

@@ -15,27 +15,8 @@ export class ImageService {
   public downloadURL?: string;
 
   constructor(
-    private storage: AngularFireStorage,
+    
   ) { }
 
-  public startUpload(file: File) {    
-
-    const path = `/aquarium/aquariums/${Date.now()}_${file.name}`;
-    const ref = this.storage.ref(path);
-
-    // The main task
-    return this.storage.upload(path, file).snapshotChanges().pipe(
-      finalize(() => {
-        ref.getDownloadURL().subscribe((url) => {
-          console.log(url);
-        })
-      })
-    ).subscribe((res) => {
-      console.log(res);
-    });
-  }
-
-  isActive(snapshot: any) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
-  }
+  
 }

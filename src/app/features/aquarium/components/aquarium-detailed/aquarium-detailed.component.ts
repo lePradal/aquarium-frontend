@@ -16,17 +16,17 @@ import { imgPlaceholder } from 'src/app/config/const';
 export class AquariumDetailedComponent implements OnInit {
 
   public aquarium: IAquarium;
-  public imgSrc = imgPlaceholder;
   public id: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private aquariumService: AquariumService,
-    private imageService: ImageService,
     private router: Router,
     private loaderService: NgxSpinnerService) {
       this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
-      this.aquarium = {};
+      this.aquarium = {
+        imageUrl: imgPlaceholder,
+      };
     }
 
   ngOnInit(): void {
