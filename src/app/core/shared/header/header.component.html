@@ -25,7 +25,7 @@
       <div *ngIf="user" class="d-flex flex-row mt-2">
         <ul class="navbar-nav mr-4">
           <li class="nav-item">
-            <a class="nav-link">Leandro</a>
+            <a class="nav-link">{{ user.name }}</a>
           </li>
         </ul>
         <img id="userImg" [src]="userImgSrc" class="nav-link">

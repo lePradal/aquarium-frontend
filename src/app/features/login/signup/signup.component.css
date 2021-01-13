@@ -6,3 +6,8 @@
 a {
     text-decoration: none;
 }
+
+label {
+    font-weight: bolder;
+    color: rgba(29, 114, 130, 0.8)
+}

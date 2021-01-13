@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { ModalComponent } from 'src/app/core/shared/modal/modal.component';
 import { AquariumComponent } from './aquarium.component';

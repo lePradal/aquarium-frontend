@@ -1,12 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { imgPlaceholder } from 'src/app/config/const';
 import { IAquarium } from 'src/app/features/aquarium/model/aquarium';
 import { AquariumService } from 'src/app/features/aquarium/service/aquarium.service';
-import { ImageService } from 'src/app/core/services/image/image.service';
-import { imgPlaceholder } from 'src/app/config/const';
 
 @Component({
   selector: 'app-aquarium-detailed',
@@ -42,7 +40,7 @@ export class AquariumDetailedComponent implements OnInit {
         this.aquarium = response;
         this.loaderService.hide();
       }
-    })
+    });
   }
 
 

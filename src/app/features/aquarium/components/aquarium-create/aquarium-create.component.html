@@ -12,6 +12,7 @@
         <div class="user-image d-flex justify-content-center">
           <input type="file" hidden accept="image/jpg" #file (change)="fileChange($event)">
           <img [src]="imgSrc" class="img-radius" alt="User-Profile-Image" (click)="file.click()">
+          <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl" hidden>
         </div>
         <hr>
         <div class="p-3">
@@ -22,9 +23,7 @@
           </div>
           <div class="form-floating">
             <input type="text" class="form-control" id="description" formControlName="description" placeholder="Some description">
-            <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl" hidden>
             <label for="description">Description</label>
-            <small *ngIf="aquariumForm.get('description').errors?.required" class="text-danger d-block mt-2">Description is required!</small>
           </div>
         </div>
         <div class="d-flex justify-content-center p-1 mb-2">

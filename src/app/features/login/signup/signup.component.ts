@@ -19,9 +19,10 @@ export class SignupComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private loaderService: NgxSpinnerService) {
     this.signUpForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(6), Validators.pattern('[a-zA-Z]*')]],
+      surname: ['', [Validators.required, Validators.pattern(/^\b(?!.*?\s{2})[A-Za-z ]{1,50}\b$/gm)]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
 
     this.requested = false;
@@ -50,6 +51,5 @@ export class SignupComponent implements OnInit {
         this.loaderService.hide();
       },
     });
-    
   }
 }

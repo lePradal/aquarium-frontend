@@ -1,1 +1,77 @@
-<p>aquarium-update works!</p>
+<div class="container detailed d-flex justify-content-center mt-3">
+    <form [formGroup]="aquariumForm" (ngSubmit)="onSubmit(aquariumForm.value)">
+      <div class="card user-card w-100">
+        <div class="card-header">
+          <div class="form-floating mb-3">
+            <input #aquariumNameInput type="text" class="form-control" id="name" formControlName="name" placeholder="Aquarium Name">
+            <label for="name">Aquarium Name</label>
+            <small *ngIf="aquariumForm.get('name').errors?.required" class="text-danger d-block mt-2">Name is required!</small>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="user-image d-flex justify-content-center">
+            <input type="file" hidden accept="image/jpg" #file (change)="fileChange($event)">
+            <img [src]="imgSrc" class="img-radius" alt="User-Profile-Image" (click)="file.click()">
+            <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl" hidden>
+          </div>
+          <hr>
+          <div class="p-3">
+            <div class="form-floating">
+              <input type="number" class="form-control" id="volume" formControlName="volume" placeholder="50" max="5000">
+              <label for="volume">Volume</label>
+              <small *ngIf="aquariumForm.get('volume').errors?.required" class="text-danger d-block mt-2">Volume is required!</small>
+            </div>
+            <div class="form-floating">
+              <input type="text" class="form-control" id="description" formControlName="description" placeholder="Some description">
+              <label for="description">Description</label>
+            </div>
+
+            <div class="form-floating ml-4 mt-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" formControlName="controlActive" id="controlActive">
+                    <label class="form-check-label" for="controlActive">Active control</label>
+                </div>
+            </div>
+
+            <div *ngIf="aquariumForm.get('controlActive').value" class="form-floating ml-4 mt-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" formControlName="tempControlActive" id="tempControlActive">
+                    <label class="form-check-label" for="tempControlActive">Active temperature control</label>
+                </div>
+            </div>
+
+            <div *ngIf="aquariumForm.get('controlActive').value && aquariumForm.get('tempControlActive').value" class="form-floating mt-3">
+                <input type="number" class="form-control" id="setPointTemp" formControlName="setPointTemp" placeholder="Some description">
+                <label for="setPointTemp">Set Point Temperature</label>
+                <small *ngIf="aquariumForm.get('setPointTemp').errors?.required" class="text-danger d-block mt-2">Set Point is required!</small>
+            </div>
+
+            <div *ngIf="aquariumForm.get('controlActive').value" class="form-floating ml-4 mt-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" formControlName="phMonitActive" id="phMonitActive">
+                    <label class="form-check-label" for="phMonitActive">Active pH control</label>
+                </div>
+            </div>
+
+            <div *ngIf="aquariumForm.get('controlActive').value && aquariumForm.get('phMonitActive').value" class="form-floating mt-3">
+                <input type="number" class="form-control" id="pH" formControlName="pH" placeholder="Some description">
+                <label for="pH">pH</label>
+                <small *ngIf="aquariumForm.get('pH').errors?.required" class="text-danger d-block mt-2">pH is required!</small>
+            </div>
+          </div>
+
+            <div class="d-flex justify-content-center mb-2">
+                <div class="btn-group" role="group">
+                    <button type="submit" class="btn btn-outline-info" [disabled]="aquariumForm.invalid">Save</button>
+                    <button type="button" class="btn btn-outline-danger" routerLink="/aquarium">Back</button>
+                </div>
+            </div>
+  
+          <div *ngIf="error" class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
+            <strong>Ops!</strong>{{ returnMsg }} 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
