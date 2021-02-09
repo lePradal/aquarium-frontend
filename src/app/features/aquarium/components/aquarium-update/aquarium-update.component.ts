@@ -82,14 +82,9 @@ export class AquariumUpdateComponent implements OnInit {
           pH: [this.aquarium.pH, Validators.required],
         });
 
-        console.log(this.aquariumForm.get('imageUrl').value);
-
         this.loaderService.hide();
       }
     });
-
-    console.log(this.aquariumForm.get('imageUrl').value);
-
   }
 
   public onSubmit(aquarium: AquariumUpdateRequest) {

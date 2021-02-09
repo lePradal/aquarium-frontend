@@ -12,3 +12,8 @@ img {
 button {
     width: 150px;
 }
+
+label {
+    font-weight: bolder;
+    color: rgba(29, 124, 150, 0.8);
+}

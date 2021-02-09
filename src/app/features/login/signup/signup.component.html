@@ -4,13 +4,14 @@
         <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name" autofocus>
         <label for="name">Name</label>
         <small *ngIf="signUpForm.get('name').errors?.required" class="text-danger d-block mt-2">Name is required!</small>
-        <small *ngIf="signUpForm.get('name').errors?.minlength" class="text-danger d-block mt-2">Name must be at least 6 characters long!</small>
+        <small *ngIf="signUpForm.get('name').errors?.minlength" class="text-danger d-block mt-2">Name must be at least 3 characters long!</small>
         <small *ngIf="signUpForm.get('name').errors?.pattern" class="text-danger d-block mt-2">Name contains invalid characters!</small>
       </div>
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="surname" formControlName="surname" placeholder="Surname" autofocus>
         <label for="surname">Surname</label>
         <small *ngIf="signUpForm.get('surname').errors?.required" class="text-danger d-block mt-2">Surname is required!</small>
+        <small *ngIf="signUpForm.get('surname').errors?.minlength" class="text-danger d-block mt-2">Surname must be at least 3 characters long!</small>
         <small *ngIf="signUpForm.get('surname').errors?.pattern" class="text-danger d-block mt-2">Surname contains invalid characters!</small>
 
       </div>
@@ -18,14 +19,13 @@
         <input type="email" class="form-control" id="email" formControlName="email" placeholder="name@example.com">
         <label for="email">Email</label>
         <small *ngIf="signUpForm.get('email').errors?.required" class="text-danger d-block mt-2">Email is required!</small>
-
+        <small *ngIf="signUpForm.get('email').errors?.email" class="text-danger d-block mt-2">Invalid email format!</small>
       </div>
       <div class="form-floating">
         <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
         <label for="password">Password</label>
         <small *ngIf="signUpForm.get('password').errors?.required" class="text-danger d-block mt-2">Password is required!</small>
         <small *ngIf="signUpForm.get('password').errors?.minlength" class="text-danger d-block mt-2">Password must be at least 8 characters long.!</small>
-
       </div>
       <div *ngIf="requested && !createdUser" class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
         <strong>Ops!</strong> {{ returnMsg }}.

@@ -5,4 +5,11 @@
 
 a {
     text-decoration: none;
+    font-weight: bolder;
+    color: rgba(29, 124, 150, 0.8);
+}
+
+label {
+    font-weight: bolder;
+    color: rgba(29, 124, 150, 0.8);
 }

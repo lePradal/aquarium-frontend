@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ClickOutsideModule } from 'ng-click-outside';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,7 @@ import { HomeComponent } from './features/home/home/home.component';
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
+    ClickOutsideModule,
     CommonModule,
     HttpClientModule,
     NgxSpinnerModule,
@@ -31,4 +33,4 @@ import { HomeComponent } from './features/home/home/home.component';
   providers: [ ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
