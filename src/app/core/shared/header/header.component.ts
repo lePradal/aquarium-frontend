@@ -46,7 +46,6 @@ export class HeaderComponent implements OnInit {
     if (!this._eref.nativeElement.contains(event.target))
       this.collapsable.nativeElement.classList.remove('show');
       this.collapsable.nativeElement.classList.add('hide');
-      console.log(this.collapsable);
    }
 
   public logout() {
