@@ -9,7 +9,10 @@ import { UserService } from '../../services/user/user.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  host: {
+    '(document:click)': 'onClick($event)',
+  },
 })
 export class HeaderComponent implements OnInit {
 
@@ -37,16 +40,17 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  public ngOnInit(): void {}
+
+  public onClick(event: any) {
+    if (!this._eref.nativeElement.contains(event.target))
+      this.collapsable.nativeElement.classList.remove('show');
+      this.collapsable.nativeElement.classList.add('hide');
+      console.log(this.collapsable);
+   }
 
   public logout() {
     this.userService.logout();
     this.router.navigate(['login']);
-  }
-
-  public onClick(event: any) {
-    if (!this._eref.nativeElement.contains(event.target)) {}
-      //doSomething();
   }
 }
