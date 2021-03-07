@@ -44,10 +44,7 @@ export class AquariumUpdateComponent implements OnInit {
         description: [''],
         imageUrl: [''],
         controlActive: [false],
-        tempControlActive: [false],
         setPointTemp: ['', Validators.required],
-        phMonitActive: [false],
-        pH: ['', Validators.required],
       });
 
       this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -76,10 +73,7 @@ export class AquariumUpdateComponent implements OnInit {
           description: [this.aquarium.description],
           imageUrl: [this.aquarium.imageUrl],
           controlActive: [this.aquarium.controlActive],
-          tempControlActive: [this.aquarium.tempControlActive],
           setPointTemp: [this.aquarium.setPointTemp, Validators.required],
-          phMonitActive: [this.aquarium.phMonitActive],
-          pH: [this.aquarium.pH, Validators.required],
         });
 
         this.loaderService.hide();

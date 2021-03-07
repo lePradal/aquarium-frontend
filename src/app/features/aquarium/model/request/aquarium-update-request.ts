@@ -6,9 +6,7 @@ export class AquariumUpdateRequest {
     public imageUrl?: string;
     public volume?: number;
     public controlActive?: boolean;
-    public tempControlActive?: boolean;
     public setPointTemp?: number;
-    public phMonitActive?: boolean;
  
     constructor(aquarium: IAquarium) {
         this.name = aquarium.name;
@@ -16,8 +14,6 @@ export class AquariumUpdateRequest {
         this.description = aquarium.description;
         this.imageUrl = aquarium.imageUrl;
         this.controlActive = aquarium.controlActive;
-        this.tempControlActive = aquarium.tempControlActive;
         this.setPointTemp = aquarium.setPointTemp;
-        this.phMonitActive = aquarium.phMonitActive;
     }
 }

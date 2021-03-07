@@ -37,6 +37,7 @@ export class AquariumDetailedComponent implements OnInit {
         this.router.navigate(['aquarium']);
       },
       next: (response) => {
+        console.log(response);
         this.aquarium = response;
         this.loaderService.hide();
       }

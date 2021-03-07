@@ -11,10 +11,8 @@
         <div class="p-3">
           <p *ngIf="aquarium.description" class="text-muted">Descrição: {{ aquarium.description }}</p>
           <p class="text-muted">Volume: {{ aquarium.volume | number: '1.1'}} L</p>
-          <p *ngIf="aquarium.controlActive" class="text-muted">Nível: {{ aquarium.waterLevel | percent: '1.1'}}</p>
-          <p *ngIf="aquarium.controlActive && aquarium.tempControlActive" class="text-muted">Temperatura: {{ aquarium.temperature | number: '1.1'}} °C</p>
-          <p *ngIf="aquarium.controlActive && aquarium.tempControlActive" class="text-muted">Temp. desejada: {{ aquarium.setPointTemp | number: '1.1'}} °C</p>
-          <p *ngIf="aquarium.controlActive && aquarium.phMonitActive" class="text-muted">pH: {{ aquarium.pH | number: '1.1'}}</p>
+          <p *ngIf="aquarium.controlActive" class="text-muted">Temperatura: {{ aquarium.temperature | number: '1.1'}} °C</p>
+          <p *ngIf="aquarium.controlActive" class="text-muted">Temp. desejada: {{ aquarium.setPointTemp | number: '1.1'}} °C</p>
 
           <p class="text-muted">status: {{ aquarium.status}}</p>
           

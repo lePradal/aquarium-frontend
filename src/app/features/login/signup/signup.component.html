@@ -1,7 +1,7 @@
 <div class="container mt-5 p-4 w-75 signup-container">
     <form [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm.value)">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name" autofocus>
+        <input #inputName type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
         <label for="name">Name</label>
         <small *ngIf="signUpForm.get('name').errors?.required" class="text-danger d-block mt-2">Name is required!</small>
         <small *ngIf="signUpForm.get('name').errors?.minlength" class="text-danger d-block mt-2">Name must be at least 3 characters long!</small>
@@ -20,6 +20,8 @@
         <label for="email">Email</label>
         <small *ngIf="signUpForm.get('email').errors?.required" class="text-danger d-block mt-2">Email is required!</small>
         <small *ngIf="signUpForm.get('email').errors?.email" class="text-danger d-block mt-2">Invalid email format!</small>
+        <small *ngIf="signUpForm.get('email').errors?.emailIsTaken" class="text-danger d-block mt-2">Email already used!</small>
+        <small *ngIf="signUpForm.get('email').valid" class="text-success d-block mt-2">Email is available!</small>
       </div>
       <div class="form-floating">
         <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
@@ -28,7 +30,7 @@
         <small *ngIf="signUpForm.get('password').errors?.minlength" class="text-danger d-block mt-2">Password must be at least 8 characters long.!</small>
       </div>
       <div *ngIf="requested && !createdUser" class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
-        <strong>Ops!</strong> {{ returnMsg }}.
+        <strong>Ops!</strong> {{ returnMsg }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       <div *ngIf="requested && createdUser" class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
@@ -36,7 +38,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       <div *ngIf="!createdUser" class="d-grid gap-2 mt-3">
-        <button type="submit" class="btn btn-info btn-lg" [disabled]="signUpForm.invalid">Create Account</button>
+        <button type="submit" class="btn btn-info btn-lg" [disabled]="signUpForm.invalid || signUpForm.pending">Create Account</button>
       </div>
       <div *ngIf="createdUser" class="d-grid gap-2 mt-3">
         <button type="button" class="btn btn-info btn-lg" routerLink="/login">Signin Now!</button>

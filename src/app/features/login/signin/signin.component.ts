@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,10 +11,11 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, AfterViewInit {
 
   public signInForm: any;
-  @ViewChild('emailInput') public emailInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('emailInput')
+  public emailInput!: ElementRef;
   public accessDenied: boolean | undefined;;
   public returnMsg: string | undefined;
 
@@ -25,7 +26,12 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  public ngAfterViewInit(): void {
+    this.emailInput?.nativeElement.focus();
+  }
+
+  ngOnInit(): void {
+  }
 
   public onSubmit(customerData: ISignInRequest) {
     this.loaderService.show();

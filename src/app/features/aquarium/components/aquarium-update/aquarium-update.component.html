@@ -33,30 +33,10 @@
                 </div>
             </div>
 
-            <div *ngIf="aquariumForm.get('controlActive').value" class="form-floating ml-4 mt-3">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" formControlName="tempControlActive" id="tempControlActive">
-                    <label class="form-check-label" for="tempControlActive">Active temperature control</label>
-                </div>
-            </div>
-
-            <div *ngIf="aquariumForm.get('controlActive').value && aquariumForm.get('tempControlActive').value" class="form-floating mt-3">
+            <div *ngIf="aquariumForm.get('controlActive').value" class="form-floating mt-3">
                 <input type="number" class="form-control" id="setPointTemp" formControlName="setPointTemp" placeholder="Some description">
                 <label for="setPointTemp">Set Point Temperature</label>
                 <small *ngIf="aquariumForm.get('setPointTemp').errors?.required" class="text-danger d-block mt-2">Set Point is required!</small>
-            </div>
-
-            <div *ngIf="aquariumForm.get('controlActive').value" class="form-floating ml-4 mt-3">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" formControlName="phMonitActive" id="phMonitActive">
-                    <label class="form-check-label" for="phMonitActive">Active pH control</label>
-                </div>
-            </div>
-
-            <div *ngIf="aquariumForm.get('controlActive').value && aquariumForm.get('phMonitActive').value" class="form-floating mt-3">
-                <input type="number" class="form-control" id="pH" formControlName="pH" placeholder="Some description">
-                <label for="pH">pH</label>
-                <small *ngIf="aquariumForm.get('pH').errors?.required" class="text-danger d-block mt-2">pH is required!</small>
             </div>
           </div>
 

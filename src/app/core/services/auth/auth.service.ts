@@ -51,6 +51,10 @@ export class AuthService {
     return this.tokenService.hasToken();
   }
 
+  public emailAlreadyTaken(email: string) {
+    return this.http.get(`${urlConfig.user}/exists/${email}`);
+  }
+
   public getHttpOptions() {
     if(!this.tokenService.hasToken()) {
       return { headers: new HttpHeaders({}) };

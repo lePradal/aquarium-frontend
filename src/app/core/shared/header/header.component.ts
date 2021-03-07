@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private _eref: ElementRef
   ) {
     this.user = null;
     this.user$ = this.userService.getUser();
@@ -42,11 +41,10 @@ export class HeaderComponent implements OnInit {
 
   public ngOnInit(): void {}
 
-  public onClick(event: any) {
-    if (!this._eref.nativeElement.contains(event.target))
-      this.collapsable.nativeElement.classList.remove('show');
-      this.collapsable.nativeElement.classList.add('hide');
-   }
+  public onClick() {
+    this.collapsable.nativeElement.classList.remove('show');
+    this.collapsable.nativeElement.classList.add('hide');
+  }
 
   public logout() {
     this.userService.logout();

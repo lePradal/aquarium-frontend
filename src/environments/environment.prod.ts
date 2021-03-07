@@ -1,4 +1,5 @@
 export const environment = {
+  name: 'prod',
   production: true,
   API: 'https://api-aquario.herokuapp.com',
   firebaseConfig: {

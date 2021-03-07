@@ -1,7 +1,7 @@
 export const environment = {
-  name: 'default',
+  name: 'local',
   production: false,
-  API: 'https://api-aquario.herokuapp.com',
+  API: 'http://localhost:8080',
   firebaseConfig: {
     apiKey: "AIzaSyDNBzHEeQUTHv2Vuj0XUfXMzLqlCYvEiP0",
     authDomain: "aquarium-frontend.firebaseapp.com",
