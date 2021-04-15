@@ -81,12 +81,14 @@ export class AquariumUpdateComponent implements OnInit {
     });
   }
 
-  public onSubmit(aquarium: AquariumUpdateRequest) {
+  public onSubmit(request: AquariumUpdateRequest) {
     this.loaderService.show();
     this.error = false;
-    aquarium.imageUrl = this.imgUrl;
+    request.imageUrl = this.imgUrl;
+    request.temperature = this.aquarium.temperature;
+    request.status = this.aquarium.status;
 
-    this.aquariumService.updateAquarium(this.id, aquarium).subscribe({
+    this.aquariumService.updateAquarium(this.id, request).subscribe({
       error: (error: HttpErrorResponse) => {
         this.error = true;
         console.error(error);
