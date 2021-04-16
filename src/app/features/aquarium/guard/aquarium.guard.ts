@@ -14,6 +14,10 @@ export class AquariumGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
       const allowed = this.authService.isLoggedUser();
 
+      if (allowed) {
+        this.authService.validateToken();
+      }
+
       if (!allowed) {
         this.router.navigate(['login']);
       }

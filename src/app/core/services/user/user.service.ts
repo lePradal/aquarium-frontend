@@ -13,7 +13,11 @@ export class UserService {
 
   private userSubject = new Subject<IUser>();
 
-  constructor(private tokenService: TokenService, private http: HttpClient) {
+  constructor(
+    private tokenService: TokenService,
+    private http: HttpClient,
+    private router: Router,
+    ) {
     this.tokenService.hasToken() && this.notify();
   }
 
@@ -56,6 +60,7 @@ export class UserService {
   public logout() {
     this.tokenService.removeToken();
     this.userSubject.next(undefined);
+    this.router.navigate(['/login']);
   }
 
   public isLogged() {
